@@ -1,0 +1,355 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		6E4104781A17B6E500C3045F /* IPaFBKitUniversalFramework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 6E4104851A17B6E500C3045F /* Build configuration list for PBXAggregateTarget "IPaFBKitUniversalFramework" */;
+			buildPhases = (
+				6E4104771A17B6E500C3045F /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = IPaFBKitUniversalFramework;
+			productName = IPaFBKitUniversalFramework;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		6E41047D1A17B6E500C3045F /* IPaFBKit-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 6E41047C1A17B6E500C3045F /* IPaFBKit-Prefix.pch */; };
+		6E41047F1A17B6E500C3045F /* IPaFBKit-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E41047E1A17B6E500C3045F /* IPaFBKit-Info.plist */; };
+		6E41048A1A17B71300C3045F /* IPaFBKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E4104881A17B71300C3045F /* IPaFBKit.h */; };
+		6E41048B1A17B71300C3045F /* IPaFBKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E4104891A17B71300C3045F /* IPaFBKit.m */; };
+		6E41048D1A17B72800C3045F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E41048C1A17B72800C3045F /* FacebookSDK.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6E4104751A17B6E500C3045F /* IPaFBKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IPaFBKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E41047B1A17B6E500C3045F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E41047C1A17B6E500C3045F /* IPaFBKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IPaFBKit-Prefix.pch"; sourceTree = "<group>"; };
+		6E41047E1A17B6E500C3045F /* IPaFBKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IPaFBKit-Info.plist"; sourceTree = "<group>"; };
+		6E4104881A17B71300C3045F /* IPaFBKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPaFBKit.h; sourceTree = "<group>"; };
+		6E4104891A17B71300C3045F /* IPaFBKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPaFBKit.m; sourceTree = "<group>"; };
+		6E41048C1A17B72800C3045F /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../IPhoneDevelop/IPhoneSDK/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6E4104711A17B6E500C3045F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E41048D1A17B72800C3045F /* FacebookSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6E41046B1A17B6E500C3045F = {
+			isa = PBXGroup;
+			children = (
+				6E4104791A17B6E500C3045F /* IPaFBKit */,
+				6E4104761A17B6E500C3045F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6E4104761A17B6E500C3045F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6E4104751A17B6E500C3045F /* IPaFBKit.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6E4104791A17B6E500C3045F /* IPaFBKit */ = {
+			isa = PBXGroup;
+			children = (
+				6E4104881A17B71300C3045F /* IPaFBKit.h */,
+				6E4104891A17B71300C3045F /* IPaFBKit.m */,
+				6E41047C1A17B6E500C3045F /* IPaFBKit-Prefix.pch */,
+				6E41047E1A17B6E500C3045F /* IPaFBKit-Info.plist */,
+				6E41048C1A17B72800C3045F /* FacebookSDK.framework */,
+				6E41047A1A17B6E500C3045F /* Supporting Files */,
+			);
+			path = IPaFBKit;
+			sourceTree = "<group>";
+		};
+		6E41047A1A17B6E500C3045F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6E41047B1A17B6E500C3045F /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		6E4104721A17B6E500C3045F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E41048A1A17B71300C3045F /* IPaFBKit.h in Headers */,
+				6E41047D1A17B6E500C3045F /* IPaFBKit-Prefix.pch in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		6E4104741A17B6E500C3045F /* IPaFBKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E4104821A17B6E500C3045F /* Build configuration list for PBXNativeTarget "IPaFBKit" */;
+			buildPhases = (
+				6E4104701A17B6E500C3045F /* Sources */,
+				6E4104711A17B6E500C3045F /* Frameworks */,
+				6E4104721A17B6E500C3045F /* Headers */,
+				6E4104731A17B6E500C3045F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IPaFBKit;
+			productName = IPaFBKit;
+			productReference = 6E4104751A17B6E500C3045F /* IPaFBKit.framework */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6E41046C1A17B6E500C3045F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "A Magic Studio";
+				TargetAttributes = {
+					6E4104741A17B6E500C3045F = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					6E4104781A17B6E500C3045F = {
+						CreatedOnToolsVersion = 6.1;
+					};
+				};
+			};
+			buildConfigurationList = 6E41046F1A17B6E500C3045F /* Build configuration list for PBXProject "IPaFBKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6E41046B1A17B6E500C3045F;
+			productRefGroup = 6E4104761A17B6E500C3045F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6E4104741A17B6E500C3045F /* IPaFBKit */,
+				6E4104781A17B6E500C3045F /* IPaFBKitUniversalFramework */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6E4104731A17B6E500C3045F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E41047F1A17B6E500C3045F /* IPaFBKit-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6E4104771A17B6E500C3045F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Sets the target folders and the final framework product.\nFMK_NAME=${PRODUCT_NAME}\nFMK_VERSION=A\n\n# Install dir will be the final output to the framework.\n# The following line create it in the root folder of the current project.\nINSTALL_DIR=${SRCROOT}/Products/${FMK_NAME}.framework\n\n# Working dir will be deleted after the framework creation.\nWRK_DIR=build\nDEVICE_DIR=${WRK_DIR}/Release-iphoneos/${FMK_NAME}.framework\nSIMULATOR_DIR=${WRK_DIR}/Release-iphonesimulator/${FMK_NAME}.framework\n\n# Building both architectures.\nxcodebuild -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphoneos\nxcodebuild -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphonesimulator\n\n# Cleaning the oldest.\nif [ -d \"${INSTALL_DIR}\" ]\nthen\nrm -rf \"${INSTALL_DIR}\"\nfi\n\n# Creates and renews the final product folder.\nmkdir -p \"${INSTALL_DIR}\"\nmkdir -p \"${INSTALL_DIR}/Versions\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Headers\"\n\n# Creates the internal links.\n# It MUST uses relative path, otherwise will not work when the folder is copied/moved.\nln -s \"${FMK_VERSION}\" \"${INSTALL_DIR}/Versions/Current\"\nln -s \"Versions/Current/Headers\" \"${INSTALL_DIR}/Headers\"\nln -s \"Versions/Current/Resources\" \"${INSTALL_DIR}/Resources\"\nln -s \"Versions/Current/${FMK_NAME}\" \"${INSTALL_DIR}/${FMK_NAME}\"\n\n# Copies the headers and resources files to the final product folder.\ncp -R \"${DEVICE_DIR}/Headers/\" \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Headers/\"\ncp -R \"${DEVICE_DIR}/\" \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources/\"\n\n# Removes the binary and header from the resources folder.\nrm -r \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources/Headers\" \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources/${FMK_NAME}\"\n\n# Uses the Lipo Tool to merge both binary files (i386 + armv6/armv7) into one Universal final product.\nlipo -create \"${DEVICE_DIR}/${FMK_NAME}\" \"${SIMULATOR_DIR}/${FMK_NAME}\" -output \"${INSTALL_DIR}/Versions/${FMK_VERSION}/${FMK_NAME}\"\n\nrm -r \"${WRK_DIR}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6E4104701A17B6E500C3045F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E41048B1A17B71300C3045F /* IPaFBKit.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6E4104801A17B6E500C3045F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+			};
+			name = Debug;
+		};
+		6E4104811A17B6E500C3045F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+			};
+			name = Release;
+		};
+		6E4104831A17B6E500C3045F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/IPaPa/Documents/IPhoneDevelop/IPhoneSDK/FacebookSDK,
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				INFOPLIST_FILE = IPaFBKit/Info.plist;
+				INSTALL_PATH = " $(BUILT_PRODUCTS_DIR)";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		6E4104841A17B6E500C3045F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/IPaPa/Documents/IPhoneDevelop/IPhoneSDK/FacebookSDK,
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				INFOPLIST_FILE = IPaFBKit/Info.plist;
+				INSTALL_PATH = " $(BUILT_PRODUCTS_DIR)";
+				LINK_WITH_STANDARD_LIBRARIES = NO;
+				MACH_O_TYPE = mh_object;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		6E4104861A17B6E500C3045F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = IPaFBKit;
+			};
+			name = Debug;
+		};
+		6E4104871A17B6E500C3045F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = IPaFBKit;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6E41046F1A17B6E500C3045F /* Build configuration list for PBXProject "IPaFBKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E4104801A17B6E500C3045F /* Debug */,
+				6E4104811A17B6E500C3045F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E4104821A17B6E500C3045F /* Build configuration list for PBXNativeTarget "IPaFBKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E4104831A17B6E500C3045F /* Debug */,
+				6E4104841A17B6E500C3045F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E4104851A17B6E500C3045F /* Build configuration list for PBXAggregateTarget "IPaFBKitUniversalFramework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E4104861A17B6E500C3045F /* Debug */,
+				6E4104871A17B6E500C3045F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6E41046C1A17B6E500C3045F /* Project object */;
+}
