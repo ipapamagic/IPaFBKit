@@ -44,6 +44,22 @@ static IPaFBKit *instance;
     
     return self;
 }
+- (void)loginFBInBackgroundWithReadPermissions:(NSArray*)permissions
+{
+    if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
+        
+        // If there's one, just open the session silently, without showing the user the login UI
+        [FBSession openActiveSessionWithReadPermissions:permissions
+                                           allowLoginUI:NO
+                                      completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+                                          // Handler for session state changes
+                                          // This method will be called EACH time the session state changes,
+                                          // also for intermediate states and NOT just when the session open
+                                          
+                                      }];
+        
+    }
+}
 - (void)loginFBWithReadPermissions:(NSArray*)permissions callback:(void (^)(BOOL))callback
 {
     if ([FBSession activeSession].isOpen) {
@@ -196,5 +212,14 @@ static IPaFBKit *instance;
             callback(NO);
         }
     }];
+}
+
+- (NSString*)imageLinkWithFBID:(NSString*)fbID
+{
+    return [self imageLinkWithFBID:fbID type:@"normal"];
+}
+- (NSString*)imageLinkWithFBID:(NSString *)fbID type:(NSString*)type
+{
+    return [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=%@", fbID,type];
 }
 @end
