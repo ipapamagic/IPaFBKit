@@ -101,13 +101,20 @@ static IPaFBKit *instance;
     [FBRequestConnection startWithGraphPath:@"/me/permissions"
                           completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                               if (!error){
-                                  NSDictionary *currentPermissions= [(NSArray *)[result data] objectAtIndex:0];
+                                  NSArray *permissionList = (NSArray *)[result data];
+                                  NSMutableDictionary *currentPermissions = [@{} mutableCopy];
+                                  for (NSDictionary *permission in permissionList) {
+                                      currentPermissions[permission[@"permission"]] = permission[@"status"];
+                                  }
+                                  
+                                  
                                   NSMutableArray *requestPermissions = [[NSMutableArray alloc] initWithArray:@[]];
                                   
                                   // Check if all the permissions we need are present in the user's current permissions
                                   // If they are not present add them to the permissions to be requested
                                   for (NSString *permission in permissionsNeeded){
-                                      if (![currentPermissions objectForKey:permission]){
+                                      NSString *status = [currentPermissions objectForKey:permission];
+                                      if (![status isEqualToString:@"granted"]){
                                           [requestPermissions addObject:permission];
                                       }
                                   }
@@ -173,36 +180,57 @@ static IPaFBKit *instance;
     //                                   @"http://i.imgur.com/g3Qc1HN.png", @"picture",
     //                                   nil];
     void (^doShareLink)() = ^(){
-        NSMutableDictionary *params = [@{@"link":link} mutableCopy];
-        if (name != nil) {
-            params[@"name"] = name;
-        }
-        if (caption != nil) {
-            params[@"caption"] = caption;
-        }
-        if (description != nil) {
-            params[@"description"] = description;
-        }
-        if (picture != nil) {
-            params[@"picture"] = picture;
-        }
         
+        FBLinkShareParams *params = [[FBLinkShareParams alloc] initWithLink:[NSURL URLWithString:link]name:name caption:caption
+              description:description              picture:[NSURL URLWithString:picture]];
         // Make the request
-        [FBRequestConnection startWithGraphPath:@"/me/feed"
-                                     parameters:params
-                                     HTTPMethod:@"POST"
-                              completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                                  if (!error) {
-                                      // Link posted successfully to Facebook
-                                      NSLog(@"result: %@", result);
-                                      callback(YES);
-                                  } else {
-                                      // An error occurred, we need to handle the error
-                                      // See: https://developers.facebook.com/docs/ios/errors
-                                      NSLog(@"%@", error.description);
-                                      callback(NO);
-                                  }
-                              }];
+        if ([FBDialogs canPresentMessageDialogWithParams:params]) {
+            [FBDialogs presentMessageDialogWithParams:params clientState:nil handler:^(FBAppCall *appCall,NSDictionary *result,NSError* error){
+                if (!error) {
+                    // Link posted successfully to Facebook
+                    NSLog(@"result: %@", result);
+                    callback(YES);
+                } else {
+                    // An error occurred, we need to handle the error
+                    // See: https://developers.facebook.com/docs/ios/errors
+                    NSLog(@"%@", error.description);
+                    callback(NO);
+                }
+            }];
+        }
+        else {
+            NSMutableDictionary *params = [@{@"link":link} mutableCopy];
+            if (name != nil) {
+                params[@"name"] = name;
+            }
+            if (caption != nil) {
+                params[@"caption"] = caption;
+            }
+            if (description != nil) {
+                params[@"description"] = description;
+            }
+            if (picture != nil) {
+                params[@"picture"] = picture;
+            }
+            
+            // Make the request
+            [FBRequestConnection startWithGraphPath:@"/me/feed"
+                                         parameters:params
+                                         HTTPMethod:@"POST"
+                                  completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                                      if (!error) {
+                                          // Link posted successfully to Facebook
+                                          NSLog(@"result: %@", result);
+                                          callback(YES);
+                                      } else {
+                                          // An error occurred, we need to handle the error
+                                          // See: https://developers.facebook.com/docs/ios/errors
+                                          NSLog(@"%@", error.description);
+                                          callback(NO);
+                                      }
+                                  }];
+        }
+    
     };
     [self requestPublishPermissions:@[@"publish_actions"] callback:^(BOOL success){
         if (success) {
