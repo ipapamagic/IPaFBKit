@@ -44,22 +44,41 @@ static IPaFBKit *instance;
     
     return self;
 }
-- (void)loginFBInBackgroundWithReadPermissions:(NSArray*)permissions
+
+- (void)loginFBWithPublishPermissions:(NSArray*)permissions defaultAudience:(FBSessionDefaultAudience)defaultAudience callback:(void (^)(BOOL))callback
 {
-    if (FBSession.activeSession.state == FBSessionStateCreatedTokenLoaded) {
-        
-        // If there's one, just open the session silently, without showing the user the login UI
-        [FBSession openActiveSessionWithReadPermissions:permissions
-                                           allowLoginUI:NO
-                                      completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
-                                          // Handler for session state changes
-                                          // This method will be called EACH time the session state changes,
-                                          // also for intermediate states and NOT just when the session open
-                                          
-                                      }];
-        
+    if ([FBSession activeSession].isOpen) {
+        //already login
+        if (([FBSession activeSession].state & FBSessionStateCreatedTokenLoaded) == FBSessionStateCreatedTokenLoaded) {
+            
+            callback(YES);
+            return ;
+        }
+        else {
+            [[FBSession activeSession] closeAndClearTokenInformation];
+        }
     }
+    
+    BOOL hasCacheFBToken = ([FBSession activeSession].state == FBSessionStateCreatedTokenLoaded);
+    [FBSession openActiveSessionWithPublishPermissions:permissions defaultAudience:defaultAudience allowLoginUI:!hasCacheFBToken completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+                                      /* handle success + failure in block */
+                                      switch (status) {
+                                          case FBSessionStateOpen:
+                                              callback(YES);
+                                              break;
+                                              
+                                          case FBSessionStateClosed:
+                                              break;
+                                          case FBSessionStateClosedLoginFailed:
+                                              callback(NO);
+                                              break;
+                                          default:
+                                              break;
+                                      }
+                                      
+                                  }];
 }
+
 - (void)loginFBWithReadPermissions:(NSArray*)permissions callback:(void (^)(BOOL))callback
 {
     if ([FBSession activeSession].isOpen) {
@@ -95,7 +114,7 @@ static IPaFBKit *instance;
                                       
                                   }];
 }
-- (void)requestPublishPermissions:(NSArray*)permissionsNeeded callback:(void (^)(BOOL))callback
+- (void)requestPublishPermissions:(NSArray*)permissionsNeeded defaultAudience:(FBSessionDefaultAudience)defaultAudience callback:(void (^)(BOOL))callback
 {
     // Request the permissions the user currently has
     [FBRequestConnection startWithGraphPath:@"/me/permissions"
@@ -123,7 +142,7 @@ static IPaFBKit *instance;
                                   if ([requestPermissions count] > 0){
                                       // Ask for the missing permissions
                                       [FBSession.activeSession requestNewPublishPermissions:requestPermissions
-                                                                            defaultAudience:FBSessionDefaultAudienceFriends
+                                                                            defaultAudience:defaultAudience
                                                                           completionHandler:^(FBSession *session, NSError *error) {
                                                                               if (!error) {
                                                                                   // Permission granted, we can request the user information
@@ -165,6 +184,69 @@ static IPaFBKit *instance;
     [[FBSession activeSession] closeAndClearTokenInformation];
 }
 #pragma mark - Share
+- (void)sharePhoto:(UIImage*)image message:(NSString*)message privacy:(NSDictionary*)privacy callback:(void (^)(NSString*))callbak
+{
+//    FBRequest *request = [FBRequest requestForUploadPhoto:image];
+//    FBRequestConnection *fbConnection = [[FBRequestConnection alloc] init];
+//
+//    [fbConnection addRequest:request completionHandler:^(FBRequestConnection *connect,id result,NSError* error){
+//        if (error) {
+//            callbak(nil);
+//        }
+//        else {
+//            callbak(((NSDictionary*)result)[@"id"]);
+//       }        
+//    }];
+//    [fbConnection start];
+    NSMutableDictionary *params = [@{} mutableCopy];
+    params[@"source"] = UIImageJPEGRepresentation(image, 1);
+    if (message != nil) {
+        params[@"message"] = message;
+    }
+    if (privacy != nil) {
+        params[@"privacy"] = privacy;
+    }
+    [FBRequestConnection startWithGraphPath:@"/me/photos"
+                                 parameters:params
+                                 HTTPMethod:@"POST"
+                          completionHandler:^(
+                                              FBRequestConnection *connection,
+                                              id result,
+                                              NSError *error
+                                              ) {
+                              if (error) {
+                                  callbak(nil);
+                              }
+                              else {
+                                  callbak(((NSDictionary*)result)[@"id"]);
+                              }
+                          }];
+}
+- (void)postOnFeedWithName:(NSString*)name caption:(NSString*)caption description:(NSString*)description picture:(NSString*)picture link:(NSString*)link callback:(void (^)(id, NSError *))callback{
+    NSMutableDictionary *params = [@{} mutableCopy];
+    if (name != nil) {
+        params[@"name"] = name;
+    }
+    if (caption != nil) {
+        params[@"caption"] = caption;
+    }
+    if (description != nil) {
+        params[@"description"] = description;
+    }
+    if (picture != nil) {
+        params[@"picture"] = picture;
+    }
+    if (link != nil) {
+        params[@"link"] = link;
+    }
+    // Make the request
+    [FBRequestConnection startWithGraphPath:@"/me/feed"
+                                 parameters:params
+                                 HTTPMethod:@"POST"
+                          completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                              callback(result,error);
+                          }];
+}
 - (void)shareLink:(NSString*)link name:(NSString*)name caption:(NSString*)caption description:(NSString*)description picture:(NSString*)picture callback:(void (^)(BOOL))callback{
     
     // NOTE: pre-filling fields associated with Facebook posts,
@@ -199,40 +281,13 @@ static IPaFBKit *instance;
             }];
         }
         else {
-            NSMutableDictionary *params = [@{@"link":link} mutableCopy];
-            if (name != nil) {
-                params[@"name"] = name;
-            }
-            if (caption != nil) {
-                params[@"caption"] = caption;
-            }
-            if (description != nil) {
-                params[@"description"] = description;
-            }
-            if (picture != nil) {
-                params[@"picture"] = picture;
-            }
-            
-            // Make the request
-            [FBRequestConnection startWithGraphPath:@"/me/feed"
-                                         parameters:params
-                                         HTTPMethod:@"POST"
-                                  completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                                      if (!error) {
-                                          // Link posted successfully to Facebook
-                                          NSLog(@"result: %@", result);
-                                          callback(YES);
-                                      } else {
-                                          // An error occurred, we need to handle the error
-                                          // See: https://developers.facebook.com/docs/ios/errors
-                                          NSLog(@"%@", error.description);
-                                          callback(NO);
-                                      }
-                                  }];
+            [self postOnFeedWithName:name caption:caption description:description picture:picture link:link callback:^(id result,NSError* error){
+                callback(error == nil);
+            }];
         }
     
     };
-    [self requestPublishPermissions:@[@"publish_actions"] callback:^(BOOL success){
+    [self requestPublishPermissions:@[@"publish_actions"] defaultAudience:FBSessionDefaultAudienceEveryone callback:^(BOOL success){
         if (success) {
             doShareLink();
         }
