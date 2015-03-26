@@ -184,7 +184,7 @@ static IPaFBKit *instance;
     [[FBSession activeSession] closeAndClearTokenInformation];
 }
 #pragma mark - Share
-- (void)sharePhoto:(UIImage*)image callback:(void (^)(NSString*))callbak
+- (void)sharePhoto:(UIImage*)image params:(NSDictionary*)params callback:(void (^)(NSString*))callbak
 {
 //    FBRequest *request = [FBRequest requestForUploadPhoto:image];
 //    FBRequestConnection *fbConnection = [[FBRequestConnection alloc] init];
@@ -198,17 +198,19 @@ static IPaFBKit *instance;
 //       }        
 //    }];
 //    [fbConnection start];
-    NSMutableDictionary *params = [@{} mutableCopy];
-    params[@"source"] = UIImageJPEGRepresentation(image, 1);
+    NSMutableDictionary *mParams = [@{} mutableCopy];
+    mParams[@"source"] = UIImageJPEGRepresentation(image, 1);
 //    if (message != nil) {
 //        params[@"message"] = message;
 //    }
 //    if (privacy != nil) {
 //        params[@"privacy"] = privacy;
 //    }
-
+    for (NSString *key in params.allKeys) {
+        mParams[key] = params[key];
+    }
     [FBRequestConnection startWithGraphPath:@"/me/photos"
-                                 parameters:params
+                                 parameters:mParams
                                  HTTPMethod:@"POST"
                           completionHandler:^(
                                               FBRequestConnection *connection,

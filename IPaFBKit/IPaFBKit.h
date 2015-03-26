@@ -22,7 +22,7 @@
 
 - (void)requestPublishPermissions:(NSArray*)permissionsNeeded defaultAudience:(FBSessionDefaultAudience)defaultAudience callback:(void (^)(BOOL))callback;
 - (void)shareLink:(NSString*)link name:(NSString*)name caption:(NSString*)caption description:(NSString*)description picture:(NSString*)picture callback:(void (^)(BOOL))callback;
-- (void)sharePhoto:(UIImage*)image callback:(void (^)(NSString*))callbak;
+- (void)sharePhoto:(UIImage*)image params:(NSDictionary*)params callback:(void (^)(NSString*))callbak;
 - (void)postOnFeedWithName:(NSString*)name caption:(NSString*)caption description:(NSString*)description picture:(NSString*)picture link:(NSString*)link callback:(void (^)(id, NSError *))callback;
 //get facebook user image link
 - (NSString*)imageLinkWithFBID:(NSString*)fbID;
