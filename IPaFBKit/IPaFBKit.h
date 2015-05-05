@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <FacebookSDK/FacebookSDK.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 @import UIKit;
 @interface IPaFBKit : NSObject {
     
@@ -16,12 +18,10 @@
 - (BOOL)isFBLogin;
 - (void)logoutFB;
 
-- (void)loginFBWithPublishPermissions:(NSArray*)permissions defaultAudience:(FBSessionDefaultAudience)defaultAudience callback:(void (^)(BOOL))callback;
+- (void)loginFBWithPublishPermissions:(NSArray*)permissions defaultAudience:(FBSDKDefaultAudience)defaultAudience callback:(void (^)(BOOL))callback;
 - (void)loginFBWithReadPermissions:(NSArray*)permissions callback:(void (^)(BOOL))callback;
 
-
-- (void)requestPublishPermissions:(NSArray*)permissionsNeeded defaultAudience:(FBSessionDefaultAudience)defaultAudience callback:(void (^)(BOOL))callback;
-- (void)shareLink:(NSString*)link name:(NSString*)name caption:(NSString*)caption description:(NSString*)description picture:(NSString*)picture callback:(void (^)(BOOL))callback;
+//- (void)shareLink:(NSString*)link name:(NSString*)name caption:(NSString*)caption description:(NSString*)description picture:(NSString*)picture callback:(void (^)(BOOL))callback;
 - (void)sharePhoto:(UIImage*)image params:(NSDictionary*)params callback:(void (^)(NSString*))callbak;
 - (void)postOnFeedWithName:(NSString*)name caption:(NSString*)caption description:(NSString*)description picture:(NSString*)picture link:(NSString*)link callback:(void (^)(id, NSError *))callback;
 //get facebook user image link
