@@ -133,6 +133,7 @@
 		6E4F36C31B5021B800FFA2D9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "A Magic Studio";
 				TargetAttributes = {
