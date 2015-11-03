@@ -10,10 +10,14 @@ import Foundation
 import FBSDKCoreKit
 import FBSDKLoginKit
 import FBSDKShareKit
-@objc public class IPaFBKit {
+public class IPaFBKit {
     static public func imageLink(fbID:String,type:String) -> String
     {
         return "http://graph.facebook.com/\(fbID)/picture?type=\(type)"
+    }
+    static public func postLink(fbID:String) -> String
+    {
+        return "https://www.facebook.com/photo.php?fbid=\(fbID)"
     }
     static public func imageLink(fbID:String) -> String
     {
