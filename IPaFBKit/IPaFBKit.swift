@@ -10,31 +10,32 @@ import Foundation
 import FBSDKCoreKit
 import FBSDKLoginKit
 import FBSDKShareKit
-public class IPaFBKit {
-    static public func imageLink(fbID:String,type:String) -> String
+open class IPaFBKit {
+    static open func imageLink(_ fbID:String,type:String) -> String
     {
         return "http://graph.facebook.com/\(fbID)/picture?type=\(type)"
     }
-    static public func postLink(fbID:String) -> String
+    static open func postLink(_ fbID:String) -> String
     {
         return "https://www.facebook.com/photo.php?fbid=\(fbID)"
     }
-    static public func imageLink(fbID:String) -> String
+    static open func imageLink(_ fbID:String) -> String
     {
         return imageLink(fbID,type:"normal")
     }
 
-    static public func isFBLogin() -> Bool {
-        return FBSDKAccessToken.currentAccessToken() != nil
+    static open func isFBLogin() -> Bool {
+        return FBSDKAccessToken.current() != nil
     }
 
     //MARK: Share
-    static public func sharePhoto(image:UIImage, params:[String:AnyObject], complete:((String?) -> ()))
+    static open func sharePhoto(_ image:UIImage,quality:CGFloat, params:[String:Any], complete:@escaping ((String?) -> ()))
     {
         var mParams = params
-        mParams["source"] = UIImageJPEGRepresentation(image, 1);
-        let request = FBSDKGraphRequest(graphPath: "/me/photos", parameters: mParams, HTTPMethod: "POST")
-        request.startWithCompletionHandler({
+        mParams["source"] = UIImageJPEGRepresentation(image, quality) as AnyObject?;
+        let request = FBSDKGraphRequest(graphPath: "/me/photos", parameters: mParams, httpMethod: "POST")!
+        
+        _ = request.start(completionHandler: {
             connection,result,error in
             if error != nil {
                 complete(nil)
@@ -50,29 +51,33 @@ public class IPaFBKit {
             }
         })
     }
-    static public func postOnFeed(name:String?, caption:String?, description:String? , picture:String?, link:String?, complete:((AnyObject, NSError) -> ()))
+    static open func postOnFeed(_ name:String?, caption:String?, description:String? , picture:String?, link:String?, complete:@escaping ((AnyObject, Error?) -> ()))
     {
         var mParams = [String:AnyObject]()
         if let name = name {
-            mParams["name"] = name
+            mParams["name"] = name as AnyObject?
         }
         if let caption = caption {
-            mParams["caption"] = caption
+            mParams["caption"] = caption as AnyObject?
         }
         if let description = description {
-            mParams["description"] = description
+            mParams["description"] = description as AnyObject?
         }
         if let picture = picture {
-            mParams["picture"] = picture
+            mParams["picture"] = picture as AnyObject?
         }
         if let link = link {
-            mParams["link"] = link
+            mParams["link"] = link as AnyObject?
         }
-        let request = FBSDKGraphRequest(graphPath: "/me/feed", parameters: mParams, HTTPMethod: "POST")
-        request.startWithCompletionHandler({
+        let request = FBSDKGraphRequest(graphPath: "/me/feed", parameters: mParams, httpMethod: "POST")!
+        request.start(completionHandler: {
             connection,result,error in
-            complete(result,error)
+            complete(result as AnyObject,error)
         })
+//        request.start(completionHandler: {
+//            connection,result,error in
+//            complete(result,error)
+//        })
 
     }
 }
