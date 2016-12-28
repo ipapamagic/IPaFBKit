@@ -1,0 +1,6 @@
+use_frameworks!
+target 'IPaFBKit_Tests' do
+  pod 'IPaFBKit', :path => '../'
+  
+  
+end
