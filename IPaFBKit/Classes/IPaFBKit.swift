@@ -10,26 +10,29 @@ import Foundation
 import FBSDKCoreKit
 import FBSDKLoginKit
 import FBSDKShareKit
-open class IPaFBKit {
-    static open func imageLink(_ fbID:String,type:String) -> String
+open class IPaFBKit:NSObject {
+    @objc static open func imageLink(_ fbID:String,type:String) -> String
     {
         return "http://graph.facebook.com/\(fbID)/picture?type=\(type)"
     }
-    static open func postLink(_ fbID:String) -> String
+    @objc static open func postLink(_ fbID:String) -> String
     {
         return "https://www.facebook.com/photo.php?fbid=\(fbID)"
     }
-    static open func imageLink(_ fbID:String) -> String
+    @objc static open func imageLink(_ fbID:String) -> String
     {
         return imageLink(fbID,type:"normal")
     }
 
-    static open func isFBLogin() -> Bool {
+    @objc static open func isFBLogin() -> Bool {
         return FBSDKAccessToken.current() != nil
     }
-
+    
+    @objc static open func checkPermissions(_ permission:String) -> Bool {
+        return FBSDKAccessToken.current().hasGranted(permission)
+    }
     //MARK: Share
-    static open func sharePhoto(_ image:UIImage,quality:CGFloat, params:[String:Any], complete:@escaping ((String?) -> ()))
+    @objc static open func sharePhoto(_ image:UIImage,quality:CGFloat, params:[String:Any], complete:@escaping ((String?) -> ()))
     {
         var mParams = params
         mParams["source"] = UIImageJPEGRepresentation(image, quality) as AnyObject?;
@@ -51,7 +54,7 @@ open class IPaFBKit {
             }
         })
     }
-    static open func postOnFeed(_ name:String?, caption:String?, description:String? , picture:String?, link:String?, complete:@escaping ((AnyObject, Error?) -> ()))
+    @objc static open func postOnFeed(_ name:String?, caption:String?, description:String? , picture:String?, link:String?, complete:@escaping ((AnyObject, Error?) -> ()))
     {
         var mParams = [String:AnyObject]()
         if let name = name {
@@ -80,4 +83,15 @@ open class IPaFBKit {
 //        })
 
     }
+    
+    @objc static open func me(_ fields:[String],complete:@escaping (Any?,Error?)->()) {
+        let fieldsString = fields.joined(separator: ",")
+        let parameters = ["fields":fieldsString]
+        let request = FBSDKGraphRequest(graphPath:"me",parameters:parameters)
+        _ = request?.start(completionHandler: { connection, user, error in
+            complete(user,error)
+        })
+    }
+  
+    
 }
