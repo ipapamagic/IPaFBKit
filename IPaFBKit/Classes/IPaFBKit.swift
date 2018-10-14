@@ -35,7 +35,7 @@ open class IPaFBKit:NSObject {
     @objc static open func sharePhoto(_ image:UIImage,quality:CGFloat, params:[String:Any], complete:@escaping ((String?) -> ()))
     {
         var mParams = params
-        mParams["source"] = UIImageJPEGRepresentation(image, quality) as AnyObject?;
+        mParams["source"] = image.jpegData(compressionQuality:quality) as AnyObject?
         let request = FBSDKGraphRequest(graphPath: "/me/photos", parameters: mParams, httpMethod: "POST")!
         
         _ = request.start(completionHandler: {
