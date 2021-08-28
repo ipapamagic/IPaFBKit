@@ -73,10 +73,10 @@ open class IPaFBKit:NSObject {
             mParams["link"] = link as AnyObject?
         }
         let request = GraphRequest(graphPath: "/me/feed", parameters: mParams, httpMethod: HTTPMethod(rawValue: "POST"))
-        request.start(completionHandler: {
+        request.start {
             connection,result,error in
             complete(result as AnyObject,error)
-        })
+        }
 //        request.start(completionHandler: {
 //            connection,result,error in
 //            complete(result,error)
@@ -88,9 +88,9 @@ open class IPaFBKit:NSObject {
         let fieldsString = fields.joined(separator: ",")
         let parameters = ["fields":fieldsString]
         let request = GraphRequest(graphPath:"me",parameters:parameters)
-        _ = request.start(completionHandler: { connection, user, error in
+        _ = request.start { connection, user, error in
             complete(user,error)
-        })
+        }
     }
   
     
