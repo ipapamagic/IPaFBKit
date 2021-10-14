@@ -37,8 +37,7 @@ open class IPaFBKit:NSObject {
         var mParams = params
         mParams["source"] = image.jpegData(compressionQuality:quality) as AnyObject?
         let request = GraphRequest(graphPath: "/me/photos", parameters: mParams, httpMethod: HTTPMethod(rawValue: "POST"))
-        
-        _ = request.start(completionHandler: {
+        _ = request.start(completion: {
             connection,result,error in
             if error != nil {
                 complete(nil)
